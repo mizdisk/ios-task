@@ -12,8 +12,15 @@ class CampaignListingViewController: UIViewController {
 
     private let imageService = ServiceLocator.instance.imageService
 
-    @IBOutlet
-    private(set) weak var typedView: CampaignListingView!
+    @IBOutlet private(set) weak var typedView: CampaignListingView!
+    
+    /** Flow layout outlet to set dynamic size of the items. */
+    @IBOutlet private(set) weak var collectionLayout: UICollectionViewFlowLayout! {
+        didSet {
+            collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()

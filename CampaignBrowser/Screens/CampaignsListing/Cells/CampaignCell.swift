@@ -17,6 +17,24 @@ class CampaignCell: UICollectionViewCell {
 
     /** The image view which is used to display the campaign's mood image. */
     @IBOutlet private(set) weak var imageView: UIImageView!
+    
+    /** Image  view constraint to forcefully limit width of collection view. */
+    @IBOutlet private var imageViewMaxWidthConstraint: NSLayoutConstraint! {
+        didSet {
+            imageViewMaxWidthConstraint.isActive = false
+        }
+    }
+
+    /** A property to be used to set possible max width for the cell. */
+    var maxWidth: CGFloat? = nil {
+        didSet {
+            guard let maxWidth = maxWidth else {
+                return
+            }
+            imageViewMaxWidthConstraint.isActive = true
+            imageViewMaxWidthConstraint.constant = maxWidth
+        }
+    }
 
     /** The mood image which is displayed as the background. */
     var moodImage: Observable<UIImage>? {
